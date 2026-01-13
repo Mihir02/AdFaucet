@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "project": "Sepolia ETH Faucet",
+    "date": "2025-10-04",
+    "prepared_by": "Software Development Manager"
+  },
+  "product_overview": "Sepolia ETH Faucet is a Next.js 14 web application designed to securely provide free Sepolia testnet ETH to Ethereum developers, testers, and blockchain learners. It integrates a backend wallet for direct ETH transfers combined with multi-layer security, including rate limiting and ad verification, ensuring reliable and abuse-resistant distribution of testnet funds.",
+  "core_goals": [
+    "Provide a secure and reliable source of Sepolia ETH for development and testing purposes.",
+    "Integrate Web3 wallet connections supporting popular wallets like MetaMask and Coinbase Wallet.",
+    "Implement an interactive ad verification system to prevent abuse and ensure user engagement.",
+    "Enforce multi-layer rate limiting based on IP address and wallet address to protect the faucet.",
+    "Display real-time faucet wallet balance and transaction statuses to users.",
+    "Ensure seamless error handling and graceful UI feedback for failures and loading states.",
+    "Demonstrate best practices in security, architecture, and usability for Ethereum faucets."
+  ],
+  "key_features": [
+    "Direct ETH Transfers from a backend wallet using ethers.js and environment-secured private keys.",
+    "Web3 Wallet Connection supporting injected wallets with error handling and loading indicators.",
+    "Ad Verification System with a 10-second interactive ad timer and server-side session verification to prevent abuse.",
+    "Multi-layer Rate Limiting combining IP address and wallet address restrictions to regulate ETH claims.",
+    "Real-time Faucet Statistics API providing live balance and operational status updates for the faucet wallet.",
+    "Token Claim Interface displaying user balance, transaction progress, and error states.",
+    "Comprehensive Error Handling with error boundaries and loading spinners for user-friendly UI feedback.",
+    "Context-based State Management using React Context to manage faucet state and API interactions.",
+    "Responsive and aesthetic UI styled with Tailwind CSS including custom gradients and accessible patterns.",
+    "Debug Tools available for monitoring wallet connections and ad verification sessions during development."
+  ],
+  "user_flow_summary": [
+    "User visits the main faucet page and connects their preferred Web3 wallet via WalletConnect component.",
+    "The user is prompted to view an interactive advertisement which runs a 10-second timer enforcing ad engagement.",
+    "Upon successful ad viewing, the backend verifies the ad session to confirm eligibility.",
+    "User submits a claim request for Sepolia ETH which triggers backend transfer after validation of rate limits and input.",
+    "User views transaction status, with links to Etherscan for verification and balance updates reflected in the UI.",
+    "If the user attempts multiple requests too frequently, rate limiting prevents further claims until cooldown expires.",
+    "Any errors in wallet connection, ad verification, or ETH transfer are caught and displayed gracefully using error boundaries.",
+    "Users can debug and verify session states during development via dedicated debug tools.",
+    "The faucet wallet balance and operational health are accessible via the faucet statistics API shown on the frontend."
+  ],
+  "validation_criteria": [
+    "Successful connection to supported Web3 wallets with error and loading state feedback.",
+    "Ad verification process enforces a full 10-second viewing timer and rejects premature aborts.",
+    "Backend securely sends ETH to user wallets respecting environment variable-defined limits.",
+    "Rate limiting prevents multiple claims from the same IP or wallet address within the cooldown period.",
+    "Frontend reflects real-time faucet balance and transaction statuses accurately.",
+    "Error boundaries catch and display all runtime errors without crashing the UI.",
+    "API endpoints validate all inputs and return consistent, informative error responses on failure.",
+    "Performance and responsiveness meet standards across desktop and mobile devices.",
+    "All environment variables and secrets are securely managed and not exposed to the frontend.",
+    "Comprehensive unit and integration tests cover frontend components and backend API routes to ensure reliability."
+  ],
+  "code_summary": {
+    "tech_stack": [
+      "TypeScript",
+      "Next.js 14",
+      "React 18",
+      "Tailwind CSS",
+      "Wagmi",
+      "Viem",
+      "Ethers.js",
+      "Node.js",
+      "Jest"
+    ],
+    "features": [
+      {
+        "name": "Wallet Connection",
+        "description": "Web3 wallet connection functionality supporting MetaMask, Coinbase Wallet, and other injected wallets with error handling and loading states",
+        "files": [
+          "components/WalletConnect.tsx",
+          "lib/wagmi.ts"
+        ]
+      },
+      {
+        "name": "Ad Verification System",
+        "description": "Interactive advertisement viewing system with 10-second timer, server-side session tracking, and anti-abuse measures",
+        "files": [
+          "components/AdDisplay.tsx",
+          "app/api/start-ad-session/route.ts",
+          "app/api/verify-ad/route.ts",
+          "lib/ad-verifications.ts"
+        ]
+      },
+      {
+        "name": "ETH Faucet Backend",
+        "description": "Secure backend system for sending Sepolia ETH directly from wallet with rate limiting and transaction management",
+        "files": [
+          "lib/eth-faucet.ts",
+          "app/api/drip/route.ts",
+          "lib/rate-limit.ts"
+        ]
+      },
+      {
+        "name": "Token Claim Interface",
+        "description": "Frontend component for claiming ETH tokens with balance display, transaction status, and error handling",
+        "files": [
+          "components/TokenClaimButton.tsx",
+          "components/EthClaimButton.tsx"
+        ]
+      },
+      {
+        "name": "Faucet Context Management",
+        "description": "React context for managing faucet state, user balance, transaction status, and API interactions",
+        "files": [
+          "context/FaucetContext.tsx"
+        ]
+      },
+      {
+        "name": "Faucet Statistics API",
+        "description": "API endpoint for retrieving real-time faucet wallet balance and operational status",
+        "files": [
+          "app/api/faucet-stats/route.ts"
+        ]
+      },
+      {
+        "name": "Rate Limiting System",
+        "description": "Multi-layer rate limiting with IP and address-based protection to prevent abuse",
+        "files": [
+          "lib/rate-limit.ts",
+          "app/api/check-rate-limit/route.ts"
+        ]
+      },
+      {
+        "name": "Error Handling",
+        "description": "Comprehensive error boundary and loading state management for graceful failure handling",
+        "files": [
+          "components/ErrorBoundary.tsx",
+          "components/LoadingSpinner.tsx"
+        ]
+      },
+      {
+        "name": "Utility Functions",
+        "description": "Helper functions for address validation, IP detection, time formatting, and other utilities",
+        "files": [
+          "lib/utils.ts"
+        ]
+      },
+      {
+        "name": "Debug Tools",
+        "description": "Development tools for debugging wallet connections, ad sessions, and verifications",
+        "files": [
+          "app/debug/page.tsx",
+          "app/api/debug-verifications/route.ts",
+          "app/api/debug-sessions/route.ts"
+        ]
+      },
+      {
+        "name": "Main Application",
+        "description": "Main application page with step-by-step faucet flow and responsive design",
+        "files": [
+          "app/page.tsx",
+          "app/layout.tsx",
+          "app/providers.tsx"
+        ]
+      },
+      {
+        "name": "Styling System",
+        "description": "Tailwind CSS configuration with custom gradients and responsive design patterns",
+        "files": [
+          "app/globals.css",
+          "tailwind.config.js",
+          "postcss.config.js"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "executionArgs": {
+    "projectName": "crypto-faucet",
+    "projectPath": "C:\\Users\\varah\\OneDrive\\Desktop\\Kiro Proj",
+    "testIds": [
+      "TC001",
+      "TC002",
+      "TC003",
+      "TC004",
+      "TC005",
+      "TC006",
+      "TC007",
+      "TC008",
+      "TC009",
+      "TC010",
+      "TC011",
+      "TC012",
+      "TC013",
+      "TC014",
+      "TC015"
+    ],
+    "additionalInstruction": "Focus on testing the core faucet functionality including wallet connection, ad verification system, ETH claiming process, rate limiting, and error handling. Ensure tests cover both positive and negative scenarios for the Web3 integration.",
+    "envs": {
+      "API_KEY": "sk-user-ecYOZOVOFIDxprmMRFsxj_pgJcarewy6UdMb6S_o2lBcwc2JqToWI5UB4fUKC-2YWA0TlfcM-MqnINh43bZBNE5SokHNnOuHkGE-YwBmPzeOoB3dhEsIo90SUgFxo2Upmqo"
+    }
+  },
+  "proxy": "http://45fc799f-21a9-49df-be48-1f5723baef76:h9mkmrtOZDb9fqr2My0zp4WkMDbLFDbM@tun.testsprite.com:8080"
+}

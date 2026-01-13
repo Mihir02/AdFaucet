@@ -1,0 +1,417 @@
+[
+  {
+    "id": "TC001",
+    "title": "Connect to Supported Web3 Wallets Successfully",
+    "description": "Verify that the user can connect to supported Web3 wallets like MetaMask and Coinbase Wallet, with appropriate loading indicators and error handling.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the main faucet page."
+      },
+      {
+        "type": "action",
+        "description": "Click on the wallet connect button."
+      },
+      {
+        "type": "action",
+        "description": "Select MetaMask wallet and approve connection."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that the wallet connection is established and UI reflects the connected status."
+      },
+      {
+        "type": "action",
+        "description": "Disconnect and reconnect using Coinbase Wallet."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify successful MetaMask and Coinbase wallet connections with loading states shown during connection attempts."
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Wallet Connection Error Handling",
+    "description": "Ensure that errors during wallet connection are gracefully handled and error messages are displayed to the user.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Simulate wallet connection rejection by user in MetaMask."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that the error boundary captures the error and displays an informative message."
+      },
+      {
+        "type": "action",
+        "description": "Simulate a wallet connection failure due to unsupported browser."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that the UI shows an appropriate error message and does not crash."
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Ad Verification 10-Second Timer Enforcement",
+    "description": "Validate that the interactive advertisement enforces a full 10-second view timer before allowing claim eligibility.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Initiate ad viewing on the faucet page."
+      },
+      {
+        "type": "action",
+        "description": "Attempt to skip the ad before the 10-second timer completes."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that skipping is not allowed and user must complete the full 10 seconds."
+      },
+      {
+        "type": "action",
+        "description": "Complete the 10-second timer fully."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify server-side session verification confirms eligibility."
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "Ad Verification Server-Side Session Validation",
+    "description": "Test backend verification of ad sessions to ensure only valid ad views allow token claims.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Trigger ad viewing and retrieve session token."
+      },
+      {
+        "type": "action",
+        "description": "Call backend verify-ad API with valid session."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm backend validates session as successful."
+      },
+      {
+        "type": "action",
+        "description": "Call verify-ad API with an expired or tampered session."
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure backend rejects session and returns appropriate error."
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "Rate Limiting Enforces IP and Wallet Restrictions",
+    "description": "Verify multi-layer rate limiting prevents multiple claims from the same IP or wallet address within the cooldown period.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Submit a valid ETH claim from a wallet and IP."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that ETH transfer is successful and user receives transaction status."
+      },
+      {
+        "type": "action",
+        "description": "Immediately submit a subsequent claim from the same wallet."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm claim is blocked with rate limit error and user receives cooldown feedback."
+      },
+      {
+        "type": "action",
+        "description": "Submit claim from a different wallet but same IP repeatedly."
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure rate limiting blocks claims exceeding the permitted IP frequency."
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "ETH Transfer Backend Security and Limits",
+    "description": "Check backend adheres to environment-secured private keys and transfer limits during ETH drip transactions.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Trigger ETH transfer via backend API with valid claim request."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify private keys are not exposed and transfer respects environment-defined limits."
+      },
+      {
+        "type": "action",
+        "description": "Send multiple rapid requests to backend drip API exceeding allowed limits."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm backend denies excessive requests and returns informative error."
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Token Claim Interface Displays Real-Time Status",
+    "description": "Validate the frontend token claim interface shows user balance, ongoing transaction status, and error states accurately.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Connect wallet and view faucet token claim interface."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm user ETH balance is displayed correctly."
+      },
+      {
+        "type": "action",
+        "description": "Submit claim and observe transaction progress UI."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify progress is shown including links to Etherscan."
+      },
+      {
+        "type": "action",
+        "description": "Simulate an error during claim."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that meaningful error messages are displayed in UI."
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Faucet Statistics API Provides Live Wallet Data",
+    "description": "Ensure the faucet statistics API endpoint returns real-time wallet balance and operational health status correctly.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Call the faucet-stats API endpoint."
+      },
+      {
+        "type": "assertion",
+        "description": "Validate the response contains current wallet balance, transaction statuses, and health indicators."
+      },
+      {
+        "type": "action",
+        "description": "Simulate backend error during stats retrieval."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm API returns consistent and informative error responses."
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Error Boundaries and Loading Spinners Function Correctly",
+    "description": "Verify that runtime UI errors are caught by error boundaries and loading states display spinners gracefully without UI crashes.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Induce a runtime error in a React component."
+      },
+      {
+        "type": "assertion",
+        "description": "Check error boundary captures error and displays fallback UI."
+      },
+      {
+        "type": "action",
+        "description": "Trigger data loading for wallet connection or claim status."
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure loading spinner is visible until data is ready."
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Context-Based State Management Accuracy",
+    "description": "Test React Context faucet state management updates and API interaction responses correctly propagate UI changes.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Connect wallet and trigger state updates for balance and claim status."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify context state changes are correctly reflected in all dependent UI components."
+      },
+      {
+        "type": "action",
+        "description": "Simulate API failures and observe context state error updates."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm UI shows appropriate error states propagated by context."
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Responsive UI and Tailwind CSS Styling Verification",
+    "description": "Check faucet UI layout and styles respond correctly on various screen sizes and accessibility patterns are followed.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Load the faucet page on desktop viewport."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm that layout, colors, gradients, and components render aesthetically and functionally."
+      },
+      {
+        "type": "action",
+        "description": "Resize viewport to tablet and mobile screen sizes."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify UI adjusts responsively without overlaps or hidden content."
+      },
+      {
+        "type": "action",
+        "description": "Test keyboard navigation and screen reader accessibility."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm interactive elements are accessible and follow accessible patterns."
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Debug Tool Functionalities for Wallet and Ad Session",
+    "description": "Verify debug tools display accurate wallet connection states and ad verification sessions for developer monitoring.",
+    "category": "functional",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the debug tools page."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that connected wallet info and current session states are visible."
+      },
+      {
+        "type": "action",
+        "description": "Trigger new ad session and observe debug API outputs."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify debug endpoints show accurate verification and session data."
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "API Input Validation and Consistent Error Responses",
+    "description": "Ensure all API endpoints strictly validate inputs and return consistent, structured error responses upon invalid input or failure.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Call rate-limit and drip API endpoints with malformed or missing parameters."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm error responses contain clear error messages and HTTP status codes."
+      },
+      {
+        "type": "action",
+        "description": "Call verify-ad API with invalid session tokens."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that error payloads are consistent with other API error formats."
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Performance and Responsiveness Across Devices",
+    "description": "Test faucet page loading times, interactions, and responsiveness on desktop and mobile devices meet performance standards.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Measure page load times and interaction latencies on desktop with simulated network throttling."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify all elements load quickly and interactions are smooth."
+      },
+      {
+        "type": "action",
+        "description": "Repeat performance measurements on various mobile devices or emulators."
+      },
+      {
+        "type": "assertion",
+        "description": "Check that UI remains responsive and usable without delays."
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "Environment Secrets Are Secure and Not Exposed",
+    "description": "Validate that all environment variables and private keys are securely managed in backend environment and not exposed or leaked through frontend or public sources.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Review network traffic and frontend bundles for presence of private keys or environment secrets."
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure no environment variables or private keys appear in frontend code or network traffic."
+      },
+      {
+        "type": "action",
+        "description": "Check backend code handling environment variables for secure access only."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm environment variables are referenced securely and never logged or exposed."
+      }
+    ]
+  }
+]

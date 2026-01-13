@@ -1,0 +1,114 @@
+{
+  "tech_stack": [
+    "TypeScript",
+    "Next.js 14",
+    "React 18",
+    "Tailwind CSS",
+    "Wagmi",
+    "Viem",
+    "Ethers.js",
+    "Node.js",
+    "Jest"
+  ],
+  "features": [
+    {
+      "name": "Wallet Connection",
+      "description": "Web3 wallet connection functionality supporting MetaMask, Coinbase Wallet, and other injected wallets with error handling and loading states",
+      "files": [
+        "components/WalletConnect.tsx",
+        "lib/wagmi.ts"
+      ]
+    },
+    {
+      "name": "Ad Verification System",
+      "description": "Interactive advertisement viewing system with 10-second timer, server-side session tracking, and anti-abuse measures",
+      "files": [
+        "components/AdDisplay.tsx",
+        "app/api/start-ad-session/route.ts",
+        "app/api/verify-ad/route.ts",
+        "lib/ad-verifications.ts"
+      ]
+    },
+    {
+      "name": "ETH Faucet Backend",
+      "description": "Secure backend system for sending Sepolia ETH directly from wallet with rate limiting and transaction management",
+      "files": [
+        "lib/eth-faucet.ts",
+        "app/api/drip/route.ts",
+        "lib/rate-limit.ts"
+      ]
+    },
+    {
+      "name": "Token Claim Interface",
+      "description": "Frontend component for claiming ETH tokens with balance display, transaction status, and error handling",
+      "files": [
+        "components/TokenClaimButton.tsx",
+        "components/EthClaimButton.tsx"
+      ]
+    },
+    {
+      "name": "Faucet Context Management",
+      "description": "React context for managing faucet state, user balance, transaction status, and API interactions",
+      "files": [
+        "context/FaucetContext.tsx"
+      ]
+    },
+    {
+      "name": "Faucet Statistics API",
+      "description": "API endpoint for retrieving real-time faucet wallet balance and operational status",
+      "files": [
+        "app/api/faucet-stats/route.ts"
+      ]
+    },
+    {
+      "name": "Rate Limiting System",
+      "description": "Multi-layer rate limiting with IP and address-based protection to prevent abuse",
+      "files": [
+        "lib/rate-limit.ts",
+        "app/api/check-rate-limit/route.ts"
+      ]
+    },
+    {
+      "name": "Error Handling",
+      "description": "Comprehensive error boundary and loading state management for graceful failure handling",
+      "files": [
+        "components/ErrorBoundary.tsx",
+        "components/LoadingSpinner.tsx"
+      ]
+    },
+    {
+      "name": "Utility Functions",
+      "description": "Helper functions for address validation, IP detection, time formatting, and other utilities",
+      "files": [
+        "lib/utils.ts"
+      ]
+    },
+    {
+      "name": "Debug Tools",
+      "description": "Development tools for debugging wallet connections, ad sessions, and verifications",
+      "files": [
+        "app/debug/page.tsx",
+        "app/api/debug-verifications/route.ts",
+        "app/api/debug-sessions/route.ts"
+      ]
+    },
+    {
+      "name": "Main Application",
+      "description": "Main application page with step-by-step faucet flow and responsive design",
+      "files": [
+        "app/page.tsx",
+        "app/layout.tsx",
+        "app/providers.tsx"
+      ]
+    },
+    {
+      "name": "Styling System",
+      "description": "Tailwind CSS configuration with custom gradients and responsive design patterns",
+      "files": [
+        "app/globals.css",
+        "tailwind.config.js",
+        "postcss.config.js"
+      ]
+    }
+  ]
+}
