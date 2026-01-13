@@ -7,11 +7,5 @@
     "app/api/**/*.ts": {
       "maxDuration": 30
     }
-  },
-  "env": {
-    "FAUCET_PRIVATE_KEY": "@faucet_private_key",
-    "SEPOLIA_RPC_URL": "@sepolia_rpc_url",
-    "ETH_AMOUNT": "@eth_amount",
-    "COOLDOWN_HOURS": "@cooldown_hours"
   }
 }
