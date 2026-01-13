@@ -21,6 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <script src="https://quge5.com/88/tag.min.js" data-zone="201766" async data-cfasync="false"></script>
+        <script src="https://quge5.com/88/tag.min.js" data-zone="201762" async data-cfasync="false"></script>
+      </head>
       <body className={inter.className}>
         <ErrorBoundary>
           <Providers>
