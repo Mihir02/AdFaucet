@@ -1,8 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
   webpack: (config) => {
     config.resolve.fallback = { fs: false, net: false, tls: false };
     config.externals.push('pino-pretty', 'lokijs', 'encoding');
@@ -13,9 +10,9 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   typescript: {
-    // Allow production builds even with type errors
+    // Allow production builds to succeed even if TypeScript errors exist
     ignoreBuildErrors: true,
   },
 };
 
-module.exports = nextConfig
+module.exports = nextConfig;
