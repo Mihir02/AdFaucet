@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import { Providers } from './providers'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
@@ -22,14 +23,26 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script src="https://quge5.com/88/tag.min.js" data-zone="201766" async data-cfasync="false"></script>
-        <script src="https://quge5.com/88/tag.min.js" data-zone="201762" async data-cfasync="false"></script>
+        {/* PropellerAds script #1 */}
+        <Script
+          src="https://quge5.com/88/tag.min.js"
+          data-zone="201766"
+          data-cfasync="false"
+          strategy="beforeInteractive"
+        />
+
+        {/* PropellerAds script #2 */}
+        <Script
+          src="https://quge5.com/88/tag.min.js"
+          data-zone="201762"
+          data-cfasync="false"
+          strategy="beforeInteractive"
+        />
       </head>
+
       <body className={inter.className}>
         <ErrorBoundary>
-          <Providers>
-            {children}
-          </Providers>
+          <Providers>{children}</Providers>
         </ErrorBoundary>
       </body>
     </html>
