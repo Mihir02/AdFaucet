@@ -57,6 +57,15 @@ SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/your-api-key
 # OPTIONAL: Customize faucet settings
 ETH_AMOUNT=0.0005
 COOLDOWN_HOURS=24
+
+# REQUIRED: Supabase Configuration (for database storage)
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+
+# REQUIRED: PropellerAds Configuration (for ad integration)
+NEXT_PUBLIC_PROPELLER_ZONE_ID=your_propeller_zone_id_here
+NEXT_PUBLIC_PROPELLER_PUBLISHER_ID=your_propeller_publisher_id_here
+
 ```
 
 ### 3. Development
